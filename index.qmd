@@ -1,0 +1,89 @@
+---
+title: "NIVELES DE PORCINAZA Y DENSIDADES DE SIEMBRA SOBRE EL RENDIMIENTO DE MAÍZ MORADO (Zea mays L.) var. INIA-601 EN LÁMUD)"
+author: " Bach. Miguel Angel Zagaceta Llanca"
+date: "`r Sys.Date()`"
+format: 
+  html:
+    toc: true          # Índice automático
+    toc-depth: 3       # Índice con niveles (h1, h2, h3)
+    theme: cosmo       # Tema visual
+    toc-location: left # Índice lateral
+    number-sections: true
+    code-fold: true    # Permite ocultar código
+    code-tools: true   # Botones para copiar código
+    smooth-scroll: true
+    page-layout: full
+editor: visual
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+![](https://animalgourmet.com/wp-content/uploads/2024/03/Maiz-morado-de-Peru.jpg){width=90% align="center"}               
+
+> *Análisis estadístico del abono de PORCINAZA Y DENSIDADES OBTIMAS DE SIEMBRA SOBRE EL RENDIMIENTO DE MAÍZ MORADO (Zea mays L.) var. INIA-601.*
+
+---
+
+
+# INTRODUCCIÓN
+
+El presente trabajo tiene como finalidad analizar estadísticamente los datos experimentales provenientes del estudio “Niveles de porcinaza y densidades de siembra sobre el rendimiento de maíz morado (Zea mays L.) var. INIA-601 en Lámud”, con el propósito de contrastar los resultados originales de la tesis con los obtenidos mediante el procesamiento en R Studio.
+El maíz morado es un cultivo de relevancia económica y nutricional en el Perú. Sin embargo, su rendimiento depende de factores agronómicos como la densidad de siembra y el manejo de la fertilización orgánica. En este contexto, la porcinaza constituye una alternativa sostenible que puede mejorar la productividad y la salud del suelo.
+
+A través de herramientas estadísticas y gráficas en R Studio, se busca reproducir el análisis de varianza (ANOVA), la comparación de medias y la visualización de los resultados, verificando la consistencia con los hallazgos reportados en la investigación original.
+
+
+# OBJETIVOS
+
+## Generales
+
+Analizar y comparar los resultados obtenidos en la tesis con los generados mediante el procesamiento estadístico en R Studio, evaluando los efectos de los niveles de porcinaza y las densidades de siembra sobre el rendimiento del maíz morado.
+
+## Específicos
+
+1.Organizar los datos experimentales en una base de datos estructurada en formato CSV o Google Sheets.
+
+2.Importar y verificar correctamente los factores experimentales en R Studio (porcinaza, densidad y bloque).
+
+3.Realizar el análisis de varianza (ANOVA) para cada variable evaluada.
+
+4.Efectuar la comparación de medias mediante la prueba de Tukey.
+
+5.Representar los resultados de manera gráfica para visualizar las diferencias entre tratamientos.
+
+6.Contrastar los resultados obtenidos con los reportados en la tesis original.
+
+# DESARROLLO
+
+
+# CONCLUSIONES
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
