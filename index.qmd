@@ -24,7 +24,7 @@ execute:
 
 > *Análisis estadístico del abono de PORCINAZA Y DENSIDADES OBTIMAS DE SIEMBRA SOBRE EL RENDIMIENTO DE MAÍZ MORADO (Zea mays L.) var. INIA-601.*
 
-# INTEGRANTES 
+# INTEGRANTES G1
 
 1. Colunche Vasquez Josue Jhonatan 
 2. Huaman Rimarachin Milver
@@ -44,6 +44,8 @@ A través de herramientas estadísticas y gráficas en R Studio, se busca reprod
 
 
 # OBJETIVOS
+
+![](https://aula.untrm.edu.pe/pluginfile.php/1/theme_moove/logo/1649453146/Sin%20t%C3%ADtulo-1.png){width=90% align="center"}         
 
 ## General
 
@@ -166,7 +168,7 @@ ggplot(tukey_data, aes(x = porcinaza, y = emmean, fill = densidad)) +
 
 ```
 
-Gráfico 02: El gráfico evidencia que el rendimiento de grano aumentó conforme se incrementó el nivel de porcinaza aplicado, tanto en la densidad de 0.8 × 0.4 m como en 0.8 × 0.5 m. Las letras sobre las barras muestran diferencias estadísticas entre los tratamientos.
+Gráfico 01 = : El gráfico evidencia que el rendimiento de grano aumentó conforme se incrementó el nivel de porcinaza aplicado, tanto en la densidad de 0.8 × 0.4 m como en 0.8 × 0.5 m. Las letras sobre las barras muestran diferencias estadísticas entre los tratamientos.
 
 
 
@@ -403,10 +405,6 @@ ggplot(fb, aes(x = porcinaza, y = long_m, fill = densidad)) +
 $$  diam_m = \mu + bloque + porcinaza +densidad + porcinaza*densidad + e$$
 
 ### Analisis de varianza
-mm5 <- lmer(diam_m ~ bloque + porcinaza + densidad + porcinaza*densidad + (1|bloque), data = fb)
-anova(mm5)
-
-
 
 ```{r}
 md5 <- lmer(diam_m ~ bloque + porcinaza + densidad + porcinaza*densidad + (1|bloque), data = fb)
@@ -418,7 +416,7 @@ library(car)
 Anova(md5)
 ```
 
-### Comparación de medias 
+### Comparación de mediasg
 
 ```{r}
 tukey_diam_m <- emmeans(md5, ~ porcinaza*densidad) %>% 
@@ -466,6 +464,7 @@ ind <- plot(pca, choix = "ind")
 list(var, ind) %>% 
   plot_grid(plotlist =., ncol = 2, labels = "auto")
 ```
+
 
 
 # CONCLUSIONES
