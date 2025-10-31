@@ -20,32 +20,28 @@ execute:
   message: false
 ---
 
-![](https://aula.untrm.edu.pe/pluginfile.php/1/theme_moove/logo/1649453146/Sin%20t%C3%ADtulo-1.png){width=90% align="center"}               
+![](https://aula.untrm.edu.pe/pluginfile.php/1/theme_moove/logo/1649453146/Sin%20t%C3%ADtulo-1.png){width="90%" align="center"}
 
 > *Análisis estadístico del abono de PORCINAZA Y DENSIDADES OBTIMAS DE SIEMBRA SOBRE EL RENDIMIENTO DE MAÍZ MORADO (Zea mays L.) var. INIA-601.*
 
 # INTEGRANTES G1
 
-1. Colunche Vasquez Josue Jhonatan 
-2. Huaman Rimarachin Milver
-3. Maicelo Villanueva Luis Miguel
-4. Rivera Jimenez Yanet
-5. Vasquez Barboza Erik Percy
-6. Villa Tochon Jorge Luis
-
+1.  Colunche Vasquez Josue Jhonatan
+2.  Huaman Rimarachin Milver
+3.  Maicelo Villanueva Luis Miguel
+4.  Rivera Jimenez Yanet
+5.  Vasquez Barboza Erik Percy
+6.  Villa Tochon Jorge Luis
 
 # INTRODUCCIÓN
 
-El presente trabajo tiene como finalidad analizar estadísticamente los datos experimentales
-provenientes del estudio “Niveles de porcinaza y densidades de siembra sobre el rendimiento de maíz morado (Zea mays L.) var. INIA-601 en Lámud”, con el propósito de contrastar los resultados originales de la tesis con los obtenidos mediante el procesamiento en R Studio.
-El maíz morado es un cultivo de relevancia económica y nutricional en el Perú. Sin embargo, su rendimiento depende de factores agronómicos como la densidad de siembra y el manejo de la fertilización orgánica. En este contexto, la porcinaza constituye una alternativa sostenible que puede mejorar la productividad y la salud del suelo.
+El presente trabajo tiene como finalidad analizar estadísticamente los datos experimentales provenientes del estudio “Niveles de porcinaza y densidades de siembra sobre el rendimiento de maíz morado (Zea mays L.) var. INIA-601 en Lámud”, con el propósito de contrastar los resultados originales de la tesis con los obtenidos mediante el procesamiento en R Studio. El maíz morado es un cultivo de relevancia económica y nutricional en el Perú. Sin embargo, su rendimiento depende de factores agronómicos como la densidad de siembra y el manejo de la fertilización orgánica. En este contexto, la porcinaza constituye una alternativa sostenible que puede mejorar la productividad y la salud del suelo.
 
 A través de herramientas estadísticas y gráficas en R Studio, se busca reproducir el análisis de varianza (ANOVA), la comparación de medias y la visualización de los resultados, verificando la consistencia con los hallazgos reportados en la investigación original.
 
-
 # OBJETIVOS
 
-![](https://aula.untrm.edu.pe/pluginfile.php/1/theme_moove/logo/1649453146/Sin%20t%C3%ADtulo-1.png){width=90% align="center"}         
+![](https://aula.untrm.edu.pe/pluginfile.php/1/theme_moove/logo/1649453146/Sin%20t%C3%ADtulo-1.png){width="90%" align="center"}
 
 ## General
 
@@ -71,11 +67,11 @@ Analizar y comparar los resultados obtenidos en la tesis con los generados media
 
 Los datos experimentales fueron recolectados del anexo de la tesis y organizados en un archivo CSV denominado DBCA_maiz_morado.csv, que contiene los factores y variables evaluadas:
 
-1. Factores: Nivel de porcinaza (0, 160, 320 y 480 g/planta) y Densidad de siembra (0.8×0.4 m y 0.8×0.5 m).
+1.  Factores: Nivel de porcinaza (0, 160, 320 y 480 g/planta) y Densidad de siembra (0.8×0.4 m y 0.8×0.5 m).
 
-2. Bloques: 4 repeticiones.
+2.  Bloques: 4 repeticiones.
 
-3. Variables: Altura de planta, número de mazorcas por planta, longitud, diámetro y peso de mazorca, altura de inserción, número de mazorcas por hectárea y rendimiento de grano por hectárea.
+3.  Variables: Altura de planta, número de mazorcas por planta, longitud, diámetro y peso de mazorca, altura de inserción, número de mazorcas por hectárea y rendimiento de grano por hectárea.
 
 ## Librerías
 
@@ -109,14 +105,13 @@ fb <- gs %>%
 str(fb)
 ```
 
-
 ## VARIBLE 1: rendimiento grano por hectarea (rend_g_ha)
 
 ### Modelo lineal
 
 $$  Rendiminto_g_ha = \mu + bloque + porcinaza +densidad + porcinaza*densidad + e$$
 
-### Analisi de varianza 
+### Analisi de varianza
 
 ```{r}
 md <- lmer(rend_g_ha ~ bloque + porcinaza + densidad + porcinaza*densidad + (1|bloque), data = fb)
@@ -131,7 +126,8 @@ library(car)
 ```{r}
 Anova(md)
 ```
-El análisis mostró que los factores porcinaza y densidad tuvieron un efecto altamente significativo sobre el rendimiento del cultivo (p < 0.001). Asimismo, la interacción porcinaza × densidad fue significativa, indicando que la respuesta del rendimiento a la porcinaza depende del nivel de densidad empleado. En cambio, el factor bloque no presentó diferencias significativas.
+
+El análisis mostró que los factores porcinaza y densidad tuvieron un efecto altamente significativo sobre el rendimiento del cultivo (p \< 0.001). Asimismo, la interacción porcinaza × densidad fue significativa, indicando que la respuesta del rendimiento a la porcinaza depende del nivel de densidad empleado. En cambio, el factor bloque no presentó diferencias significativas.
 
 ### Comparación de medias
 
@@ -140,6 +136,7 @@ library(multcomp)
 tukey <- emmeans(md, ~ porcinaza*densidad)
 summary(tukey)
 ```
+
 ```{r}
 tukey <- emmeans(md, ~ porcinaza*densidad) %>% 
   cld(adjust = "tukey", Letters = letters)
@@ -147,6 +144,7 @@ tukey <- emmeans(md, ~ porcinaza*densidad) %>%
 print(tukey)
 
 ```
+
 ```{r}
 tukey <- emmeans(md, ~ porcinaza*densidad) %>% 
   cld(adjust = "tukey", Letters = letters)
@@ -170,8 +168,6 @@ ggplot(tukey_data, aes(x = porcinaza, y = emmean, fill = densidad)) +
 
 Gráfico 01 = : El gráfico evidencia que el rendimiento de grano aumentó conforme se incrementó el nivel de porcinaza aplicado, tanto en la densidad de 0.8 × 0.4 m como en 0.8 × 0.5 m. Las letras sobre las barras muestran diferencias estadísticas entre los tratamientos.
 
-
-
 como pedir a la ia
 
 Con las base de datos fbhacer un grafico boxplot donde en el eje x incluir niveles de porcinaza agrupados por densidad para la variable rend_g_ha
@@ -183,12 +179,12 @@ ggplot(fb, aes(x = porcinaza, y = rend_g_ha, fill = densidad)) +
   theme_minimal()
 
 ```
-Ggrafico 01: El gráfico muestra que, al aumentar la porcinaza, el rendimiento del cultivo mejora en ambas densidades. Los mejores resultados se lograron con 480 g/planta, especialmente con la densidad de 0.8 × 0.5 m, donde el rendimiento fue más alto. Esto indica que la combinación de mayor porcinaza y mayor densidad produce el mejor desempeño.
 
+Ggrafico 01: El gráfico muestra que, al aumentar la porcinaza, el rendimiento del cultivo mejora en ambas densidades. Los mejores resultados se lograron con 480 g/planta, especialmente con la densidad de 0.8 × 0.5 m, donde el rendimiento fue más alto. Esto indica que la combinación de mayor porcinaza y mayor densidad produce el mejor desempeño.
 
 ## variable 2: altura de planta a los 30 dias (altu30d)
 
-### Modelo lineal 
+### Modelo lineal
 
 $$altu30d = \mu + bloque + porcinaza +densidad + porcinaza*densidad + e$$
 
@@ -209,8 +205,12 @@ Anova(md)
 
 Ningún factor ni combinación de factores tuvo un efecto notable sobre la altura a los 30 días en tu experimento.
 
-### Comparación de medias 
-    como pedir 
+### Comparación de medias
+
+```         
+como pedir 
+```
+
 De la tabla de comparación de medios altu30d, realiza un gráfico de barras con la barra de error y la significnacia. Poner porcinaza en el eje x agrupado por densidad agrega las letras de significancia estadisticas
 
 ```{r}
@@ -233,7 +233,6 @@ ggplot(tukey_data_altu30d, aes(x = porcinaza, y = emmean, fill = densidad)) +
   theme_minimal()
 ```
 
-
 ```{r}
 ggplot(fb, aes(x = porcinaza, y = alt180d, fill = densidad)) + 
   geom_boxplot() +
@@ -241,18 +240,17 @@ ggplot(fb, aes(x = porcinaza, y = alt180d, fill = densidad)) +
   theme_minimal()
 ```
 
-
 ### variable 3: altura de planta a los 180 dias (altu180d)
 
-### Modelo lineal 
+### Modelo lineal
 
-$$  altu180d = \mu + bloque + porcinaza +densidad + porcinaza*densidad + e$$
-### Analisis de varianza
+$$  altu180d = \mu + bloque + porcinaza +densidad + porcinaza*densidad + e$$ \### Analisis de varianza
 
 ```{r}
 md2 <- lmer(alt180d ~ bloque + porcinaza + densidad + porcinaza*densidad + (1|bloque), data = fb)
 anova(md2)
 ```
+
 ```{r}
 library(car)
 
@@ -260,8 +258,7 @@ Anova(md2)
 
 ```
 
-### Comparación de medias 
-
+### Comparación de medias
 
 ```{r}
 tukey_alt180d <- emmeans(md2, ~ porcinaza*densidad) %>% 
@@ -283,7 +280,6 @@ ggplot(tukey_data_alt180d, aes(x = porcinaza, y = emmean, fill = densidad)) +
   theme_minimal()
 
 ```
-
 
 ```{r}
 md30 <- lmer(altu30d ~ bloque + porcinaza + densidad + porcinaza*densidad + (1|bloque), data = fb)
@@ -309,11 +305,9 @@ p180 <- ggplot(tukey180, aes(x = porcinaza, y = emmean, fill = densidad)) +
 plot_grid(p30, p180, ncol = 2)
 ```
 
-
 ## variable 4: Numero de mazorcas por planta (maz_p)
 
-
-### Modelo lineal 
+### Modelo lineal
 
 $$maz_p = \mu + bloque + porcinaza +densidad + porcinaza*densidad + e$$
 
@@ -330,8 +324,7 @@ library(car)
 Anova(md3)
 ```
 
-
-### Comparación de medias 
+### Comparación de medias
 
 ```{r}
 md3 <- lmer(maz_p ~ bloque + porcinaza + densidad + porcinaza*densidad + (1|bloque), data = fb)
@@ -348,7 +341,6 @@ ggplot(tukey_maz_p, aes(x = porcinaza, y = emmean, fill = densidad)) +
   theme_minimal()
 ```
 
-
 ```{r}
 ggplot(fb, aes(x = porcinaza, y = rend_g_ha, fill = densidad)) + 
   geom_boxplot() +
@@ -357,10 +349,9 @@ ggplot(fb, aes(x = porcinaza, y = rend_g_ha, fill = densidad)) +
   theme_minimal()
 ```
 
-
 ## variable 5: longitud de mazorca (long_m)
 
-### Modelo lineal 
+### Modelo lineal
 
 $$  long_m = \mu + bloque + porcinaza +densidad + porcinaza*densidad + e$$
 
@@ -375,7 +366,8 @@ Anova(md4)
 
 ```
 
-### Comparación de medias 
+### Comparación de medias
+
 ```{r}
 tukey_long_m <- emmeans(md4, ~ porcinaza*densidad) %>% 
   cld(adjust = "tukey", Letters = letters)
@@ -398,10 +390,10 @@ ggplot(fb, aes(x = porcinaza, y = long_m, fill = densidad)) +
   theme_minimal()
 ```
 
-
 ## variable 6: Diametro de mazorca (diam_m)
 
-### Modelo  
+### Modelo
+
 $$  diam_m = \mu + bloque + porcinaza +densidad + porcinaza*densidad + e$$
 
 ### Analisis de varianza
@@ -432,6 +424,7 @@ ggplot(tukey_diam_m, aes(x = porcinaza, y = emmean, fill = densidad)) +
   theme_minimal()
 
 ```
+
 ```{r}
 ggplot(fb, aes(x = porcinaza, y = diam_m, fill = densidad)) + 
   geom_boxplot() +
@@ -440,7 +433,7 @@ ggplot(fb, aes(x = porcinaza, y = diam_m, fill = densidad)) +
   theme_minimal()
 ```
 
-## Análisi Multivariado (PCA) 
+## Análisi Multivariado (PCA)
 
 ```{r}
 PCA(fb[, 5:13], quali.sup = 1:4, graph = T)
@@ -465,41 +458,8 @@ list(var, ind) %>%
   plot_grid(plotlist =., ncol = 2, labels = "auto")
 ```
 
-
-
 # CONCLUSIONES
 
+# REFERENCIAS
 
-
-
-
-# REFERENCIAS 
-
-Zagaceta Llanca, M. A. (2023). NIVELES DE PORCINAZA Y DENSIDADES DE SIEMBRA SOBRE EL RENDIMIENTO DE. https://repositorio.untrm.edu.pe/bitstream/handle/20.500.14077/4239/Miguel%20Angel%20Zagaceta%20Llanca%20-%20FICA.pdf?sequence=1&isAllowed=y
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+| Zagaceta Llanca, M. A. (2023). NIVELES DE PORCINAZA Y DENSIDADES DE SIEMBRA SOBRE EL RENDIMIENTO DE. <https://repositorio.untrm.edu.pe/bitstream/handle/20.500.14077/4239/Miguel%20Angel%20Zagaceta%20Llanca%20-%20FICA.pdf?sequence=1&isAllowed=y>
