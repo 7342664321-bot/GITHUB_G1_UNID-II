@@ -112,7 +112,7 @@ str(fb)
 
 ### Modelo lineal
 
-$$Rendiminto_g_ha = \mu + bloque + porcinaza +densidad + porcinaza*densidad + e$$
+$$  Rendiminto_g_ha = \mu + bloque + porcinaza +densidad + porcinaza*densidad + e$$
 
 ### Analisi de varianza 
 
@@ -444,7 +444,28 @@ ggplot(fb, aes(x = porcinaza, y = diam_m, fill = densidad)) +
 
 ## Análisi Multivariado (PCA) 
 
+```{r}
+PCA(fb[, 5:13], quali.sup = 1:4, graph = T)
+```
 
+```{r}
+dtmv <- fb %>%
+  group_by(porcinaza, densidad) %>%
+  summarise(across(where(is.numeric)
+                   , ~ mean(., na.rm = T))) %>% 
+  unite("trat", c(porcinaza, densidad), remove = F) %>% 
+  column_to_rownames("trat")
+  pca <- PCA(X = dtmv, scale.unit = T
+           , quali.sup = c(1, 2))  
+
+  
+var <- plot(pca, choix = "var")
+
+ind <- plot(pca, choix = "ind")
+
+list(var, ind) %>% 
+  plot_grid(plotlist =., ncol = 2, labels = "auto")
+```
 
 
 # CONCLUSIONES
